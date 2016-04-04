@@ -3,10 +3,15 @@
 
 package config
 
+const (
+	Defaulturl string = "http://localhost:8080/metrics"
+)
+
 type Config struct {
 	Actuatorbeat ActuatorbeatConfig
 }
 
 type ActuatorbeatConfig struct {
-	Period string `yaml:"period"`
+	Period	string `yaml:"period"`
+	URLs	[]string
 }
