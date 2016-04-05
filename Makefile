@@ -9,6 +9,10 @@ PREFIX?=.
 # Path to the libbeat Makefile
 -include $(ES_BEATS)/libbeat/scripts/Makefile
 
+GOFILES = $(shell find . -type f -name '*.go')
+actuatorbeat: $(GOFILES)
+	env GOOS=linux GOARCH=amd64 go build
+
 .PHONY: init
 init:
 	glide update  --no-recursive
