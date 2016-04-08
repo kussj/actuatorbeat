@@ -2,6 +2,7 @@ package beater
 
 import (
         "net/http"
+	"crypto/tls"
         "io/ioutil"
         "encoding/json"
         "github.com/elastic/beats/libbeat/logp"
@@ -10,7 +11,13 @@ import (
 func (ab *Actuatorbeat) GetMetricsActuator(u string) (map[string]float64, error) {
         metrics := make(map[string]float64)
 
-        resp, err := http.Get(u)
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	
+	client := &http.Client{Transport: tr}
+
+        resp, err := client.Get(u)
         defer resp.Body.Close()
 
         if err != nil {

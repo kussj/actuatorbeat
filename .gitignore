@@ -6,3 +6,4 @@
 /actuatorbeat
 /actuatorbeat.test
 *.pyc
+actuatorbeat.yml
